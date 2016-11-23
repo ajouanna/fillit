@@ -1,25 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_get_file.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msrun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/18 14:00:09 by msrun             #+#    #+#             */
-/*   Updated: 2016/11/23 15:12:59 by msrun            ###   ########.fr       */
+/*   Created: 2016/11/23 15:08:57 by msrun             #+#    #+#             */
+/*   Updated: 2016/11/23 15:13:50 by msrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "ft_fillit.h"
 
-int		main(int ac, char *av[])
+int		ft_get_file(char *buf, char *av)
 {
-	char		buf[BUFFER + 1];
+	int	fd;
+	int	ret;
 
-	if (ac != 2)
-		ft_putstr("usage : ./fillit source_file\n");
-	if (ft_get_file(buf, av[1]) != 0)
-		printf("err");
-	return (0);
+	fd = open(av, O_RDONLY);
+	if (fd == -1)
+	{
+		ft_putstr("Error open()\n");
+		return (1);
+	}
+	ret = read(fd, buf, BUFFER);
+	buf[ret] = 0;
+	if (close(fd) == -1)
+	{
+		ft_putstr("Error close()\n");
+		return (1);
+	}
+	return (ft_check_file(buf));
 }
