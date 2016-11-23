@@ -6,7 +6,7 @@
 /*   By: ajouanna <ajouanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 12:03:12 by ajouanna          #+#    #+#             */
-/*   Updated: 2016/11/23 15:53:35 by msrun            ###   ########.fr       */
+/*   Updated: 2016/11/23 17:30:58 by msrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,12 @@
 #include <stdlib.h>
 #include "libft.h"
 
-#include <stdio.h>
-
 #define BUFFER 550
 
 typedef struct	s_tetri
 {
-	char tab[4][5];
+	char	tab[3][5];
+	int		isvalid;
 }				t_tetri;
 
 int		ft_get_file(char *buf, char *av);
