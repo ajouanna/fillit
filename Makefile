@@ -12,7 +12,7 @@ INC_LIBFTPATH  = $(LIBFTPATH)
 
 all : $(NAME)
 
-$(NAME) :
+$(NAME) : $(LIST_SRC)
 		make -C $(LIBFTPATH)
 		gcc $(CFLAG) -I $(INC) -I $(INC_LIBFTPATH) $(LIST_SRC) -L$(LIBFTPATH) -lft -o $(NAME)
 
