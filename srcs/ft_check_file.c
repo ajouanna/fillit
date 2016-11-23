@@ -6,7 +6,7 @@
 /*   By: msrun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 15:09:09 by msrun             #+#    #+#             */
-/*   Updated: 2016/11/23 15:13:31 by msrun            ###   ########.fr       */
+/*   Updated: 2016/11/23 16:40:59 by msrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,5 @@ int		ft_check_file(char *buf)
 	err = ft_check_max(buf);
 	if (!err)
 		err = ft_check_itsquare(buf);
-	printf("  %d  ", err);
 	return (err);
 }
