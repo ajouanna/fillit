@@ -6,17 +6,15 @@ LIST_SRC = $(SRC)/main.c $(SRC)/ft_check_file.c $(SRC)/ft_get_file.c $(SRC)/ft_f
 
 LIST_OBJ = $(LIST_SRC:$(SRC)/%.c=$(OBJ)/%.o)
 CFLAG = -Wall -Wextra -Werror
-LIFT = libft.a
-LIFTPATH = ./libft/
-INC_LIFTPATH  = $(LIFTPATH)
+LIBFT = libft.a
+LIBFTPATH = ./libft/
+INC_LIBFTPATH  = $(LIBFTPATH)
 
 all : $(NAME)
 
-$(LIBFT) : $(LIFT)
-		make -C  $(LIBFTPATH)
-
-$(NAME) : $(LIBFT) $(LIST_SRC) 
-		gcc $(CFLAG) -I $(INC) -I $(INC_LIFTPATH) $(LIST_SRC) -L$(LIFTPATH) -lft -o $(NAME)
+$(NAME) :
+		make -C $(LIBFTPATH)
+		gcc $(CFLAG) -I $(INC) -I $(INC_LIBFTPATH) $(LIST_SRC) -L$(LIBFTPATH) -lft -o $(NAME)
 
 clean :
 		/bin/rm -f  $(LIST_OBJ)
