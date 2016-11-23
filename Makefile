@@ -13,8 +13,7 @@ INC_LIFTPATH  = $(LIFTPATH)
 all : $(NAME)
 
 $(LIBFT) :
-		cd $(LIBFTPATH)
-		make
+		make -C  $(LIBFTPATH)
 
 $(NAME) : $(LIBFT) $(LIST_SRC) 
 		gcc $(CFLAG) -I $(INC) -I $(INC_LIFTPATH) $(LIST_SRC) -L$(LIFTPATH) -lft -o $(NAME)
