@@ -6,7 +6,7 @@
 /*   By: msrun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 15:55:23 by msrun             #+#    #+#             */
-/*   Updated: 2016/11/24 18:05:29 by msrun            ###   ########.fr       */
+/*   Updated: 2016/11/24 19:16:38 by msrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,24 @@ static int		test_insert_tetri(t_map *map, t_tetri *ptetri, int x, int y)
 	}
 	xi = 0;
 	yi = 0;
-	while (((xi + x) < map->taille_map) && ((yi + y) < map->taille_map))
+/*	while (((xi + x) < map->taille_map) && ((yi + y) < map->taille_map))
 	{
 		map->map[yi + y][xi + x] = ptetri->tab[yi][xi];
+//		ft_putchar(ptetri->tab[yi][xi]);
+//		ft_putchar('\n');
 		xi++;
 		yi++;
+	}*/
+	while ((xi + x) < map->taille_map)
+	{
+		yi = 0;
+		while((yi + y) < map->taille_map)
+		{
+			if (ptetri->tab[yi][xi] != '.')
+				map->map[yi + y][xi + x] = ptetri->tab[yi][xi];
+			yi++;
+		}
+		xi++;
 	}
 	return (1);
 }
@@ -74,6 +87,7 @@ static int		resolve_map(t_map *map, t_tetri *lst)
 				lst++;
 				// DEBUG
 				display_map(cp_map);
+				ft_putchar('\n');
 				// DEBUG
 				if (lst->isvalid)
 				{
@@ -136,6 +150,7 @@ static int		count_tetri(t_tetri *lst)
 ** calcul de l'entier lsuperieur le plus proche de la racine carree d'un int
 ** NB : cette fonction ne marche pas au de de racine carree de maxint
 */
+#include <stdio.h>
 
 static int		sqrt_approx(int nb)
 {
@@ -164,7 +179,7 @@ int				ft_resolve(t_tetri *lst)
 	// DEBUG
 	print_tetri(lst);
 	// DEBUG
-	if ((taille_map = sqrt_approx(count_tetri(lst))) == 0)
+	if ((taille_map = sqrt_approx(count_tetri(lst) * 4)) == 0)
 		return (0);
 	while (taille_map < 15)
 	{
