@@ -6,7 +6,7 @@
 /*   By: msrun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 15:55:23 by msrun             #+#    #+#             */
-/*   Updated: 2016/11/24 17:23:44 by ajouanna         ###   ########.fr       */
+/*   Updated: 2016/11/24 17:25:52 by ajouanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,7 @@ int				ft_resolve(t_tetri *lst)
 		if (resolve_map(map, lst))
 			return (1);
 		free_map(map);
+		taille_map++;
 	}
 	return (0);
 }
