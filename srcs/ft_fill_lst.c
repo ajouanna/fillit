@@ -6,7 +6,7 @@
 /*   By: msrun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 15:55:12 by msrun             #+#    #+#             */
-/*   Updated: 2016/11/24 16:13:40 by ajouanna         ###   ########.fr       */
+/*   Updated: 2016/11/24 16:35:01 by msrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ t_tetri		*ft_alloc(t_tetri *lst, char *buf)
 
 /*
 ** Remplie la liste des tetriminos passee en parametre
-** AJ : expliquer la logique
 */
 
 void		ft_fill(t_tetri *lst, char *buf)
