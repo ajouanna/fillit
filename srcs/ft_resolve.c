@@ -6,7 +6,7 @@
 /*   By: msrun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 15:55:23 by msrun             #+#    #+#             */
-/*   Updated: 2016/11/24 12:59:47 by ajouanna         ###   ########.fr       */
+/*   Updated: 2016/11/24 16:10:31 by ajouanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,96 @@
 #include "ft_fillit.h"
 
 /*
+** teste si la piece peut etre posee dans la map a la position (x,y)
+** et l'insere dedans
+** A FAIRE : ne pas tester au dela des bornes de la map !!!
+*/
+
+static int		test_insert_tetri(char **map,\
+		int taille_map, t_tetri *ptetri, int x, int y)
+{
+	int xi;
+	int yi;
+
+	xi = 0;
+	yi = 0;
+	while (((xi + x) < taille_map) && ((yi + y) < taille_map))
+	{
+		if (map[yi + y][xi + x] != '.' && ptetri->tab[yi][xi] != '.')
+		{
+			return (0);
+		}
+		xi++;
+		yi++;
+	}
+	xi = 0;
+	yi = 0;
+	while (((xi + x) < taille_map) && ((yi + y) < taille_map))
+	{
+		map[yi + y][xi + x] = ptetri->tab[yi][xi];
+		xi++;
+		yi++;
+	}
+	return (1);
+}
+
+/*
 ** resolution du casse tete pour une map de taille fixe
-** je prends la premiere pice, je la place en haut a gauche, j'essaie de poser
+** je prends la premiere piece, je la place en haut a gauche, j'essaie de poser
 ** la 2de a sa droite puis en dessous etc.
 */
 
-int		resolve_map(char **map, int taille_map, t_tetri *lst)
+static int		resolve_map(char **map, int taille_map, t_tetri *lst)
 {
+	int		xi;
+	int		yi;
+	char	**cp_map;
 
-	(void)map;
-	(void)taille_map;
-	(void)lst;
+	if (lst->isvalid == 0)
+		return (0);
+	if ((cp_map = alloc_map(taille_map)) == NULL)
+		return (0);
+	yi = 0;
+	while (yi < taille_map)
+	{
+		xi = 0;
+		while (xi < taille_map)
+		{
+			copy_map(cp_map, map, taille_map);
+			if (test_insert_tetri(cp_map, taille_map, lst, xi, yi))
+			{
+				lst++;
+				if (lst->isvalid)
+				{
+					if (resolve_map(cp_map, taille_map, lst))
+						return (1);
+				}
+				else
+				{
+					display_map(cp_map, taille_map);
+					free_map(cp_map, taille_map);
+					return (1);
+				}
+			}
+			xi++;
+		}
+		yi++;
+	}
 	return (0);
+}
+
+/*
+** compte le nombre de tetriminos dans la liste pasee en parametre
+*/
+
+static int		count_tetri(t_tetri *lst)
+{
+	int ret;
+
+	ret = 0;
+	while (lst[ret].isvalid)
+		ret++;
+	return (ret);
 }
 
 /*
@@ -35,14 +113,14 @@ int		resolve_map(char **map, int taille_map, t_tetri *lst)
 ** en 11 ou 12 max
 */
 
-int		ft_resolve(t_tetri *lst)
+int				ft_resolve(t_tetri *lst)
 {
 	int		taille_map;
 	char	**map;
 
 	if ((taille_map = ft_sqrt(count_tetri(lst))) == 0)
 		return (0);
-	while (taille_map < 12)
+	while (taille_map < 15)
 	{
 		if ((map = alloc_map(taille_map)) == NULL)
 			return (0);
