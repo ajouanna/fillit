@@ -6,7 +6,7 @@
 /*   By: msrun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 15:55:23 by msrun             #+#    #+#             */
-/*   Updated: 2016/11/24 11:52:19 by ajouanna         ###   ########.fr       */
+/*   Updated: 2016/11/24 12:59:47 by ajouanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,13 @@
 
 /*
 ** resolution du casse tete pour une map de taille fixe
+** je prends la premiere pice, je la place en haut a gauche, j'essaie de poser
+** la 2de a sa droite puis en dessous etc.
 */
 
 int		resolve_map(char **map, int taille_map, t_tetri *lst)
 {
+
 	(void)map;
 	(void)taille_map;
 	(void)lst;

@@ -6,11 +6,15 @@
 /*   By: msrun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 15:08:57 by msrun             #+#    #+#             */
-/*   Updated: 2016/11/23 15:13:50 by msrun            ###   ########.fr       */
+/*   Updated: 2016/11/24 13:12:09 by ajouanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_fillit.h"
+
+/*
+** lit le contenu du fichier puis en verifie la validite
+*/
 
 int		ft_get_file(char *buf, char *av)
 {

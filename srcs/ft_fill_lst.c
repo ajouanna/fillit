@@ -6,11 +6,18 @@
 /*   By: msrun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 15:55:12 by msrun             #+#    #+#             */
-/*   Updated: 2016/11/24 12:47:26 by msrun            ###   ########.fr       */
+/*   Updated: 2016/11/24 13:11:19 by ajouanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_fillit.h"
+
+/*
+** alloue dynamiquement une liste de t_tetra. La fin de liste est signalee par
+** le positionnement de isvalid a zero
+** un tetrimino occupe 4*4 caracteres, auquels il faut ajouter 4 retours a la
+** et il y a un caractere retour a la ligne entre chaque tetrimino
+*/
 
 t_tetri		*ft_alloc(t_tetri *lst, char *buf)
 {
@@ -30,6 +37,11 @@ t_tetri		*ft_alloc(t_tetri *lst, char *buf)
 	lst[i].isvalid = 0;
 	return (lst);
 }
+
+/*
+** Remplie la liste des tetriminos passee en parametre
+** AJ : expliquer la logique
+*/
 
 void		ft_fill(t_tetri *lst, char *buf)
 {
@@ -51,6 +63,10 @@ void		ft_fill(t_tetri *lst, char *buf)
 			}
 	}
 }
+
+/*
+** cree la liste de tretriminos vide puis la remplie
+*/
 
 t_tetri		*ft_fill_lst(char *buf)
 {
