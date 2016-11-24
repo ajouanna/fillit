@@ -6,7 +6,7 @@
 /*   By: msrun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/24 13:52:28 by msrun             #+#    #+#             */
-/*   Updated: 2016/11/24 15:10:40 by msrun            ###   ########.fr       */
+/*   Updated: 2016/11/24 16:44:39 by msrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 /*
 ** Verrification 4 cases dans le carre
 */
+
 int		ft_check_nbdiese(t_tetri *lst)
 {
 	int i;
@@ -56,7 +57,8 @@ int		ft_check_place(t_tetri *lst, int nblst, int y, int x)
 /*
 ** Verification si les 4 cases forme une piece
 */
-int 	ft_check_form(t_tetri *lst)
+
+int		ft_check_form(t_tetri *lst)
 {
 	int i;
 	int y;
@@ -76,7 +78,7 @@ int 	ft_check_form(t_tetri *lst)
 				{
 					if (ft_check_place(lst, i, y, z) == 1)
 						return (1);
-				}	
+				}
 			++y;
 		}
 		++i;

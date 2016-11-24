@@ -6,7 +6,7 @@
 /*   By: msrun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/24 15:11:45 by msrun             #+#    #+#             */
-/*   Updated: 2016/11/24 16:28:34 by msrun            ###   ########.fr       */
+/*   Updated: 2016/11/24 16:43:11 by msrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ void	ft_move_top(t_tetri *lst, int pos)
 		}
 		++y;
 	}
-			lst[pos].tab[3][0] = '.';
-			lst[pos].tab[3][1] = '.';
-			lst[pos].tab[3][2] = '.';
-			lst[pos].tab[3][3] = '.';
+	lst[pos].tab[3][0] = '.';
+	lst[pos].tab[3][1] = '.';
+	lst[pos].tab[3][2] = '.';
+	lst[pos].tab[3][3] = '.';
 }
 
 void	ft_move_left(t_tetri *lst, int pos)
@@ -50,10 +50,10 @@ void	ft_move_left(t_tetri *lst, int pos)
 		}
 		++y;
 	}
-			lst[pos].tab[0][3] = '.';
-			lst[pos].tab[1][3] = '.';
-			lst[pos].tab[2][3] = '.';
-			lst[pos].tab[3][3] = '.';
+	lst[pos].tab[0][3] = '.';
+	lst[pos].tab[1][3] = '.';
+	lst[pos].tab[2][3] = '.';
+	lst[pos].tab[3][3] = '.';
 }
 
 void	ft_replace_if_void(t_tetri *lst, int pos)
@@ -61,12 +61,11 @@ void	ft_replace_if_void(t_tetri *lst, int pos)
 	int i;
 
 	i = 0;
-
-	while (lst[pos].tab[0][0] != '#' && lst[pos].tab[0][1] != '#' && lst[pos].tab[0][2] != '#'
-			&& lst[pos].tab[0][3] != '#')
+	while (lst[pos].tab[0][0] != '#' && lst[pos].tab[0][1] != '#' &&
+			lst[pos].tab[0][2] != '#' && lst[pos].tab[0][3] != '#')
 		ft_move_top(lst, pos);
-	while (lst[pos].tab[0][0] != '#' && lst[pos].tab[1][0] != '#' && lst[pos].tab[2][0] != '#'
-			&& lst[pos].tab[3][0] != '#')
+	while (lst[pos].tab[0][0] != '#' && lst[pos].tab[1][0] != '#' &&
+			lst[pos].tab[2][0] != '#' && lst[pos].tab[3][0] != '#')
 		ft_move_left(lst, pos);
 }
 
@@ -83,7 +82,6 @@ void	ft_replace_to_alpha(t_tetri *lst, int pos)
 		{
 			if (lst[pos].tab[y][x] == '#')
 				lst[pos].tab[y][x] = pos + 'A';
-				y = y;
 			++x;
 		}
 		++y;
