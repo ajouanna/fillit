@@ -6,7 +6,7 @@
 /*   By: ajouanna <ajouanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 12:03:12 by ajouanna          #+#    #+#             */
-/*   Updated: 2016/11/24 16:40:21 by ajouanna         ###   ########.fr       */
+/*   Updated: 2016/11/24 16:43:58 by ajouanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ int				ft_get_file(char *buf, char *av);
 int				ft_check_file(char *buf);
 t_tetri			*ft_fill_lst(char *buf);
 int				ft_resolve(t_tetri *lst);
-char			**alloc_map(int taille_map);
-void			free_map(char **map, int taille_map);
-void			cleanup_map(char **map, int taille_map);
-void			display_map(char **map, int taille_map);
-void			copy_map(char **cp_map, char **map, int taille_map);
+t_map			*alloc_map(int taille_map);
+void			free_map(t_map *map);
+void			cleanup_map(t_map *map);
+void			display_map(t_map *map);
+void			copy_map(t_map *cp_map, t_map *map);
 
 #endif
