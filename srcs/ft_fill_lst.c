@@ -6,7 +6,11 @@
 /*   By: msrun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 15:55:12 by msrun             #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2016/11/24 13:38:00 by msrun            ###   ########.fr       */
+=======
 /*   Updated: 2016/11/24 13:11:19 by ajouanna         ###   ########.fr       */
+>>>>>>> 65a5ed0dfa791969b22f1f5771fb43847c01c295
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +60,11 @@ void		ft_fill(t_tetri *lst, char *buf)
 		if ((i - nb) % 5 == 4)
 			lst[nb].tab[(i - nb) % 20 / 5][(i - nb) % 5] = 0;
 		++i;
-			if ((i - nb) % 20 == 0)
-			{
-				++i;
-				++nb;
-			}
+		if ((i - nb) % 20 == 0)
+		{
+			++i;
+			++nb;
+		}
 	}
 }
 
@@ -71,7 +75,7 @@ void		ft_fill(t_tetri *lst, char *buf)
 t_tetri		*ft_fill_lst(char *buf)
 {
 	t_tetri	*lst;
-	
+
 	lst = NULL;
 	lst = ft_alloc(lst, buf);
 	if (lst == 0)
