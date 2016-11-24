@@ -6,7 +6,7 @@
 /*   By: ajouanna <ajouanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/24 11:40:14 by ajouanna          #+#    #+#             */
-/*   Updated: 2016/11/24 16:34:47 by ajouanna         ###   ########.fr       */
+/*   Updated: 2016/11/24 17:21:48 by ajouanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,31 @@
 
 /*
 ** alloue un tableau de chaines de caractere initialisees avec '.'
-** NB : pour simplifier le debugging, on prevoit des chaines terminee par 0
+** NB : pour eviter les depassements de memoire, on ajoute 3 caracteres aux
+** chaines de caracteres
 */
 
-char	**alloc_map(int taille_map)
+t_map	*alloc_map(int taille_map)
 {
 	int		i;
 	char	*str;
-	char	**map;
+	t_map	*map;
+	char	**pmap;
 
-	if ((map = (char **)malloc(sizeof(char *) * taille_map)) == NULL)
+	if ((map = (t_map *)malloc(sizeof(t_map))) == NULL)
+		return (NULL);
+	if ((pmap = (char **)malloc(sizeof(char *) * taille_map)) == NULL)
 		return (NULL);
 	i = 0;
 	while (i < taille_map)
 	{
-		if ((str = (char *)malloc(sizeof(char) * (taille_map + 1))) == NULL)
+		if ((str = (char *)malloc(sizeof(char) * (taille_map + 3))) == NULL)
 			return (NULL);
-		str[taille_map] = 0;
-		map[i] = ft_memset(str, '.', taille_map);
+		pmap[i] = ft_memset(str, '.', taille_map);
 		i++;
 	}
+	map->map = pmap;
+	map->taille_map = taille_map;
 	return (map);
 }
 
@@ -42,31 +47,33 @@ char	**alloc_map(int taille_map)
 ** suppression propre de la memoire
 */
 
-void	free_map(char **map, int taille_map)
+void	free_map(t_map *map)
 {
 	int i;
 
 	i = 0;
-	while (i < taille_map)
+	while (i < map->taille_map)
 	{
-		free(map[i]);
+		free(map->map[i]);
 		i++;
 	}
+	free(map->map);
 	free(map);
 }
 
 /*
 ** nettoyage de la map passee en param
+** NB: 3 caracteres de plus pour les chaines de caractere
 */
 
-void	cleanup_map(char **map, int taille_map)
+void	cleanup_map(t_map *map)
 {
 	int i;
 
 	i = 0;
-	while (i < taille_map)
+	while (i < map->taille_map)
 	{
-		map[i] = ft_memset(map[i], '.', taille_map);
+		map->map[i] = ft_memset(map->map[i], '.', map->taille_map + 3);
 		i++;
 	}
 }
@@ -75,18 +82,18 @@ void	cleanup_map(char **map, int taille_map)
 ** affiche la map
 */
 
-void	display_map(char **map, int taille_map)
+void	display_map(t_map *map)
 {
 	int xi;
 	int yi;
 
 	yi = 0;
-	while (yi < taille_map)
+	while (yi < map->taille_map)
 	{
 		xi = 0;
-		while (xi < taille_map)
+		while (xi < map->taille_map)
 		{
-			ft_putchar(map[yi][xi]);
+			ft_putchar(map->map[yi][xi]);
 			xi++;
 		}
 		ft_putchar('\n');
@@ -97,20 +104,21 @@ void	display_map(char **map, int taille_map)
 /*
 ** copie une map dans une autre ; les deux sont censees etre preallouees
 ** et de meme taille
+** NB: je gere 3 car de plus dans les chaines de caracteres
 */
 
-void	copy_map(char **cp_map, char **map, int taille_map)
+void	copy_map(t_map *cp_map, t_map *map)
 {
 	int xi;
 	int yi;
 
 	yi = 0;
-	while (yi < taille_map)
+	while (yi < map->taille_map)
 	{
 		xi = 0;
-		while (xi < taille_map)
+		while (xi < map->taille_map + 3)
 		{
-			cp_map[yi][xi] = map[yi][xi];
+			cp_map->map[yi][xi] = map->map[yi][xi];
 			xi++;
 		}
 		yi++;

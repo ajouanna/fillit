@@ -6,7 +6,7 @@
 /*   By: msrun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 15:55:23 by msrun             #+#    #+#             */
-/*   Updated: 2016/11/24 16:10:31 by ajouanna         ###   ########.fr       */
+/*   Updated: 2016/11/24 17:23:44 by ajouanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,16 @@
 ** A FAIRE : ne pas tester au dela des bornes de la map !!!
 */
 
-static int		test_insert_tetri(char **map,\
-		int taille_map, t_tetri *ptetri, int x, int y)
+static int		test_insert_tetri(t_map *map, t_tetri *ptetri, int x, int y)
 {
 	int xi;
 	int yi;
 
 	xi = 0;
 	yi = 0;
-	while (((xi + x) < taille_map) && ((yi + y) < taille_map))
+	while (((xi + x) < map->taille_map) && ((yi + y) < map->taille_map))
 	{
-		if (map[yi + y][xi + x] != '.' && ptetri->tab[yi][xi] != '.')
+		if (map->map[yi + y][xi + x] != '.' && ptetri->tab[yi][xi] != '.')
 		{
 			return (0);
 		}
@@ -38,9 +37,9 @@ static int		test_insert_tetri(char **map,\
 	}
 	xi = 0;
 	yi = 0;
-	while (((xi + x) < taille_map) && ((yi + y) < taille_map))
+	while (((xi + x) < map->taille_map) && ((yi + y) < map->taille_map))
 	{
-		map[yi + y][xi + x] = ptetri->tab[yi][xi];
+		map->map[yi + y][xi + x] = ptetri->tab[yi][xi];
 		xi++;
 		yi++;
 	}
@@ -53,35 +52,35 @@ static int		test_insert_tetri(char **map,\
 ** la 2de a sa droite puis en dessous etc.
 */
 
-static int		resolve_map(char **map, int taille_map, t_tetri *lst)
+static int		resolve_map(t_map *map, t_tetri *lst)
 {
 	int		xi;
 	int		yi;
-	char	**cp_map;
+	t_map	*cp_map;
 
 	if (lst->isvalid == 0)
 		return (0);
-	if ((cp_map = alloc_map(taille_map)) == NULL)
+	if ((cp_map = alloc_map(map->taille_map)) == NULL)
 		return (0);
 	yi = 0;
-	while (yi < taille_map)
+	while (yi < map->taille_map)
 	{
 		xi = 0;
-		while (xi < taille_map)
+		while (xi < map->taille_map)
 		{
-			copy_map(cp_map, map, taille_map);
-			if (test_insert_tetri(cp_map, taille_map, lst, xi, yi))
+			copy_map(cp_map, map);
+			if (test_insert_tetri(cp_map, lst, xi, yi))
 			{
 				lst++;
 				if (lst->isvalid)
 				{
-					if (resolve_map(cp_map, taille_map, lst))
+					if (resolve_map(cp_map, lst))
 						return (1);
 				}
 				else
 				{
-					display_map(cp_map, taille_map);
-					free_map(cp_map, taille_map);
+					display_map(cp_map);
+					free_map(cp_map);
 					return (1);
 				}
 			}
@@ -107,6 +106,23 @@ static int		count_tetri(t_tetri *lst)
 }
 
 /*
+** calcul de l'entier lsuperieur le plus proche de la racine carree d'un int
+** NB : cette fonction ne marche pas au de de racine carree de maxint
+*/
+
+static int		sqrt_approx(int nb)
+{
+	int i;
+
+	i = 0;
+	if (nb <= 0)
+		return (0);
+	while (i * i < nb)
+		i++;
+	return (i);
+}
+
+/*
 ** resolution du casse tete : comment faire rentrer dans un carre tous les
 ** tetriminos ?
 ** La taille max de la carte de resolution est de 15*15 mais on devrait resoudre
@@ -116,17 +132,17 @@ static int		count_tetri(t_tetri *lst)
 int				ft_resolve(t_tetri *lst)
 {
 	int		taille_map;
-	char	**map;
+	t_map	*map;
 
-	if ((taille_map = ft_sqrt(count_tetri(lst))) == 0)
+	if ((taille_map = sqrt_approx(count_tetri(lst))) == 0)
 		return (0);
 	while (taille_map < 15)
 	{
 		if ((map = alloc_map(taille_map)) == NULL)
 			return (0);
-		if (resolve_map(map, taille_map, lst))
+		if (resolve_map(map, lst))
 			return (1);
-		free_map(map, taille_map);
+		free_map(map);
 	}
 	return (0);
 }
