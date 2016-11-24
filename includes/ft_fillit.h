@@ -6,7 +6,7 @@
 /*   By: ajouanna <ajouanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 12:03:12 by ajouanna          #+#    #+#             */
-/*   Updated: 2016/11/24 16:00:36 by ajouanna         ###   ########.fr       */
+/*   Updated: 2016/11/24 16:40:21 by ajouanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,12 @@ typedef struct	s_tetri
 	char	tab[4][5];
 	int		isvalid;
 }				t_tetri;
+
+typedef struct	s_map
+{
+	char	**map;
+	int 	taille_map;
+}				t_map;
 
 int				ft_get_file(char *buf, char *av);
 int				ft_check_file(char *buf);

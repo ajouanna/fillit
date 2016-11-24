@@ -6,7 +6,7 @@
 /*   By: ajouanna <ajouanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/24 11:40:14 by ajouanna          #+#    #+#             */
-/*   Updated: 2016/11/24 16:06:35 by ajouanna         ###   ########.fr       */
+/*   Updated: 2016/11/24 16:34:47 by ajouanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void	display_map(char **map, int taille_map)
 
 /*
 ** copie une map dans une autre ; les deux sont censees etre preallouees
+** et de meme taille
 */
 
 void	copy_map(char **cp_map, char **map, int taille_map)
