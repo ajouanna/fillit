@@ -2,7 +2,8 @@ NAME = fillit
 SRC = ./srcs
 INC = ./includes
 OBJ = .
-LIST_SRC = $(SRC)/main.c $(SRC)/ft_check_file.c $(SRC)/ft_get_file.c $(SRC)/ft_fill_lst.c $(SRC)/ft_resolve.c
+LIST_SRC = $(SRC)/main.c $(SRC)/ft_check_file.c $(SRC)/ft_get_file.c\
+		   $(SRC)/ft_fill_lst.c $(SRC)/ft_resolve.c $(SRC)/ft_maputil.c
 
 LIST_OBJ = $(LIST_SRC:$(SRC)/%.c=$(OBJ)/%.o)
 CFLAG = -Wall -Wextra -Werror
