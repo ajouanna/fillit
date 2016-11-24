@@ -6,7 +6,7 @@
 /*   By: msrun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 15:55:23 by msrun             #+#    #+#             */
-/*   Updated: 2016/11/24 17:25:52 by ajouanna         ###   ########.fr       */
+/*   Updated: 2016/11/24 18:05:29 by msrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,9 @@ static int		resolve_map(t_map *map, t_tetri *lst)
 			if (test_insert_tetri(cp_map, lst, xi, yi))
 			{
 				lst++;
+				// DEBUG
+				display_map(cp_map);
+				// DEBUG
 				if (lst->isvalid)
 				{
 					if (resolve_map(cp_map, lst))
@@ -89,6 +92,30 @@ static int		resolve_map(t_map *map, t_tetri *lst)
 		yi++;
 	}
 	return (0);
+}
+
+/*
+** affiche la liste des tetriminos
+*/
+
+static void		print_tetri(t_tetri *lst)
+{
+	int ret;
+	int i;
+
+	ret = 0;
+	while (lst[ret].isvalid)
+	{
+		i = 0;
+		while (i < 4)
+		{
+			ft_putstr(lst[ret].tab[i]);
+			ft_putchar('\n');
+			i++;
+		}
+		ft_putchar('\n');
+		ret++;
+	}
 }
 
 /*
@@ -134,6 +161,9 @@ int				ft_resolve(t_tetri *lst)
 	int		taille_map;
 	t_map	*map;
 
+	// DEBUG
+	print_tetri(lst);
+	// DEBUG
 	if ((taille_map = sqrt_approx(count_tetri(lst))) == 0)
 		return (0);
 	while (taille_map < 15)
