@@ -6,11 +6,15 @@
 /*   By: msrun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 15:09:09 by msrun             #+#    #+#             */
-/*   Updated: 2016/11/23 16:40:59 by msrun            ###   ########.fr       */
+/*   Updated: 2016/11/24 13:15:50 by ajouanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_fillit.h"
+
+/*
+** verifie le nombre max de caracteres attendus
+*/
 
 int		ft_check_max(char *buf)
 {
@@ -23,6 +27,10 @@ int		ft_check_max(char *buf)
 		return (1);
 	return (0);
 }
+
+/*
+** verifie que chqaye tetrimino est bien un carre
+*/
 
 int		ft_check_itsquare(char *buf)
 {
@@ -51,6 +59,10 @@ int		ft_check_itsquare(char *buf)
 	}
 	return (0);
 }
+
+/*
+** verifie que le contenu du fichier charge dans le param buf est valide
+*/
 
 int		ft_check_file(char *buf)
 {
