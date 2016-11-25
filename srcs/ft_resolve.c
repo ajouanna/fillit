@@ -6,7 +6,7 @@
 /*   By: msrun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 15:55:23 by msrun             #+#    #+#             */
-/*   Updated: 2016/11/24 19:16:38 by msrun            ###   ########.fr       */
+/*   Updated: 2016/11/25 11:34:50 by ajouanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,27 +24,41 @@ static int		test_insert_tetri(t_map *map, t_tetri *ptetri, int x, int y)
 	int xi;
 	int yi;
 
+	// la logique : je parcours le tetrimino en x et y
+	// je verifie que je suis dans les bornes de la map pour tout point non vide
+	// si c'est le cas, je teste si je peux l'inserer
 	xi = 0;
-	yi = 0;
-	while (((xi + x) < map->taille_map) && ((yi + y) < map->taille_map))
+	/* while ((xi + x) < map->taille_map)
 	{
-		if (map->map[yi + y][xi + x] != '.' && ptetri->tab[yi][xi] != '.')
+		yi = 0;
+		while((yi + y) < map->taille_map)
 		{
-			return (0);
+			if (map->map[yi + y][xi + x] != '.' && ptetri->tab[yi][xi] != '.')
+			{
+				return (0);
+			}
+			yi++;
 		}
 		xi++;
-		yi++;
+	}*/
+	while (xi < 4)
+	{
+		yi = 0;
+		while (yi < 4)
+		{
+			if ((ptetri->tab[yi][xi] != '.') &&
+					(((yi + y) >= map->taille_map) ||
+					 (xi + x) >= map->taille_map))
+				return (0);
+			if (map->map[yi + y][xi + x] != '.' && ptetri->tab[yi][xi] != '.')
+			{
+				return (0);
+			}
+			yi++;
+		}
+		xi++;
 	}
 	xi = 0;
-	yi = 0;
-/*	while (((xi + x) < map->taille_map) && ((yi + y) < map->taille_map))
-	{
-		map->map[yi + y][xi + x] = ptetri->tab[yi][xi];
-//		ft_putchar(ptetri->tab[yi][xi]);
-//		ft_putchar('\n');
-		xi++;
-		yi++;
-	}*/
 	while ((xi + x) < map->taille_map)
 	{
 		yi = 0;
@@ -176,11 +190,14 @@ int				ft_resolve(t_tetri *lst)
 	int		taille_map;
 	t_map	*map;
 
-	// DEBUG
-	print_tetri(lst);
-	// DEBUG
 	if ((taille_map = sqrt_approx(count_tetri(lst) * 4)) == 0)
 		return (0);
+	// DEBUG
+	print_tetri(lst);
+	ft_putstr("taille map initiale : ");
+	ft_putnbr(taille_map);
+	ft_putchar('\n');
+	// DEBUG
 	while (taille_map < 15)
 	{
 		if ((map = alloc_map(taille_map)) == NULL)
