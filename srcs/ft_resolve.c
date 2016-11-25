@@ -6,7 +6,7 @@
 /*   By: msrun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 15:55:23 by msrun             #+#    #+#             */
-/*   Updated: 2016/11/25 13:29:30 by ajouanna         ###   ########.fr       */
+/*   Updated: 2016/11/25 18:49:09 by msrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,43 +24,27 @@ static int		test_insert_tetri(t_map *map, t_tetri *ptetri, int x, int y)
 	int xi;
 	int yi;
 
-	xi = 0;
-	while (xi < 4)
+	xi = -1;
+	while (++xi < 4)
 	{
-		yi = 0;
-		while (yi < 4)
+		yi = -1;
+		while (++yi < 4)
 		{
-			if ((ptetri->tab[yi][xi] != '.') &&
-					(((yi + y) >= map->taille_map) ||
-					 (xi + x) >= map->taille_map))
+			if ((ptetri->tab[yi][xi] != '.') && (((yi + y) >= map->taille_map)
+						|| (xi + x) >= map->taille_map))
 				return (0);
-			if ((((yi + y) <  map->taille_map) && (xi + x) <  map->taille_map)
-				&& (map->map[yi + y][xi + x] != '.' && ptetri->tab[yi][xi] != '.'))
-			{
+			if ((((yi + y) < map->taille_map) && (xi + x) < map->taille_map)
+			&& (map->map[yi + y][xi + x] != '.' && ptetri->tab[yi][xi] != '.'))
 				return (0);
-			}
-			yi++;
 		}
-		xi++;
 	}
-	// DEBUG
-	ft_putstr("test_insert_tetri : (x, y) = ");;
-	ft_putnbr(x);
-	ft_putchar(',');
-	ft_putnbr(y);
-	ft_putchar('\n');
-	// DEBUG
-	xi = 0;
-	while ((xi + x) < map->taille_map)
+	xi = -1;
+	while ((++xi + x) < x + 4)
 	{
-		yi = 0;
-		while((yi + y) < map->taille_map)
-		{
-			if (ptetri->tab[yi][xi] != '.')
+		yi = -1;
+		while ((++yi + y) < y + 4)
+			if (ptetri->tab[yi][xi] >= 'A' && ptetri->tab[yi][xi] <= 'Z')
 				map->map[yi + y][xi + x] = ptetri->tab[yi][xi];
-			yi++;
-		}
-		xi++;
 	}
 	return (1);
 }
@@ -77,47 +61,28 @@ static int		resolve_map(t_map *map, t_tetri *lst)
 	int		yi;
 	t_map	*cp_map;
 
-	// DEBUG
-	ft_putstr("resolve_map\n");
-	display_map(map);
-	ft_putchar('\n');
-	// DEBUG
-	if (lst->isvalid == 0)
+	if (lst->isvalid == 0 || (cp_map = alloc_map(map->taille_map)) == NULL)
 		return (0);
-	if ((cp_map = alloc_map(map->taille_map)) == NULL)
-		return (0);
-	yi = 0;
-	while (yi < map->taille_map)
+	yi = -1;
+	while (++yi < map->taille_map)
 	{
-		xi = 0;
-		while (xi < map->taille_map)
+		xi = -1;
+		while (++xi < map->taille_map)
 		{
 			copy_map(cp_map, map);
 			if (test_insert_tetri(cp_map, lst, xi, yi))
 			{
-				lst++;
+				++lst;
 				if (lst->isvalid)
-				{
 					if (resolve_map(cp_map, lst))
-					{
 						return (1);
-					}
-					lst--;
-				}
+					else
+						--lst;
 				else
-				{
-					display_map(cp_map);
-					free_map(cp_map);
-					return (1);
-				}
+					return (display_map(cp_map));
 			}
-			xi++;
 		}
-		yi++;
 	}
-	// DEBUG
-	ft_putstr("resolve_map : impossible de resoudre sur cette map\n");
-	// DEBUG
 	return (0);
 }
 
@@ -125,26 +90,27 @@ static int		resolve_map(t_map *map, t_tetri *lst)
 ** affiche la liste des tetriminos
 */
 
-static void		print_tetri(t_tetri *lst)
-{
-	int ret;
-	int i;
-
-	ft_putstr("print_tetri\n");
-	ret = 0;
-	while (lst[ret].isvalid)
-	{
-		i = 0;
-		while (i < 4)
-		{
-			ft_putstr(lst[ret].tab[i]);
-			ft_putchar('\n');
-			i++;
-		}
-		ft_putchar('\n');
-		ret++;
-	}
-}
+/*static void		print_tetri(t_tetri *lst)
+ **{
+ **	int ret;
+ **	int i;
+ **
+ **	ft_putstr("print_tetri\n");
+ **	ret = 0;
+ **	while (lst[ret].isvalid)
+ **	{
+ **		i = 0;
+ **		while (i < 4)
+ **		{
+ **			ft_putstr(lst[ret].tab[i]);
+ **			ft_putchar('\n');
+ **			i++;
+ **		}
+ **		ft_putchar('\n');
+ **		ret++;
+ **	}
+ **}
+*/
 
 /*
 ** compte le nombre de tetriminos dans la liste pasee en parametre
@@ -164,7 +130,6 @@ static int		count_tetri(t_tetri *lst)
 ** calcul de l'entier lsuperieur le plus proche de la racine carree d'un int
 ** NB : cette fonction ne marche pas au de de racine carree de maxint
 */
-#include <stdio.h>
 
 static int		sqrt_approx(int nb)
 {
@@ -174,7 +139,7 @@ static int		sqrt_approx(int nb)
 	if (nb <= 0)
 		return (0);
 	while (i * i < nb)
-		i++;
+		++i;
 	return (i);
 }
 
@@ -192,22 +157,15 @@ int				ft_resolve(t_tetri *lst)
 
 	if ((taille_map = sqrt_approx(count_tetri(lst) * 4)) == 0)
 		return (0);
-	// DEBUG
-	print_tetri(lst);
-	// DEBUG
 	while (taille_map < 15)
 	{
-		// DEBUG
-		ft_putstr("taille map : ");
-		ft_putnbr(taille_map);
-		ft_putchar('\n');
-		// DEBUG
 		if ((map = alloc_map(taille_map)) == NULL)
 			return (0);
+		cleanup_map(map);
 		if (resolve_map(map, lst))
 			return (1);
 		free_map(map);
-		taille_map++;
+		++taille_map;
 	}
 	return (0);
 }

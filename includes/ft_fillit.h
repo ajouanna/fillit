@@ -6,7 +6,7 @@
 /*   By: ajouanna <ajouanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 12:03:12 by ajouanna          #+#    #+#             */
-/*   Updated: 2016/11/24 17:21:12 by ajouanna         ###   ########.fr       */
+/*   Updated: 2016/11/25 18:40:51 by msrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int				ft_resolve(t_tetri *lst);
 t_map			*alloc_map(int taille_map);
 void			free_map(t_map *map);
 void			cleanup_map(t_map *map);
-void			display_map(t_map *map);
+int				display_map(t_map *map);
 void			copy_map(t_map *cp_map, t_map *map);
 int				ft_check_lst(t_tetri *lst);
 void			ft_replace(t_tetri *lst);

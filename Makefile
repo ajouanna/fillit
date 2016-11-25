@@ -23,6 +23,7 @@ clean :
 		/bin/rm -f  $(LIST_OBJ)
 
 fclean : clean
+		make fclean -C $(LIBFTPATH)
 		/bin/rm -f $(NAME)
 
 re : fclean all

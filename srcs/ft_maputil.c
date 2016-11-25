@@ -6,7 +6,7 @@
 /*   By: ajouanna <ajouanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/24 11:40:14 by ajouanna          #+#    #+#             */
-/*   Updated: 2016/11/24 18:26:13 by msrun            ###   ########.fr       */
+/*   Updated: 2016/11/25 18:40:10 by msrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_map	*alloc_map(int taille_map)
 	if ((pmap = (char **)malloc(sizeof(char *) * taille_map)) == NULL)
 		return (NULL);
 	i = 0;
-	while (i < taille_map)
+	while (i < taille_map + 1)
 	{
 		if ((str = (char *)malloc(sizeof(char) * (taille_map + 3))) == NULL)
 			return (NULL);
@@ -82,7 +82,7 @@ void	cleanup_map(t_map *map)
 ** affiche la map
 */
 
-void	display_map(t_map *map)
+int		display_map(t_map *map)
 {
 	int xi;
 	int yi;
@@ -99,6 +99,8 @@ void	display_map(t_map *map)
 		ft_putchar('\n');
 		yi++;
 	}
+	free_map(map);
+	return (1);
 }
 
 /*
