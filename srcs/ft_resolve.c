@@ -6,7 +6,7 @@
 /*   By: msrun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 15:55:23 by msrun             #+#    #+#             */
-/*   Updated: 2016/11/25 12:18:56 by ajouanna         ###   ########.fr       */
+/*   Updated: 2016/11/25 13:29:30 by ajouanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,13 @@ static int		test_insert_tetri(t_map *map, t_tetri *ptetri, int x, int y)
 		}
 		xi++;
 	}
+	// DEBUG
+	ft_putstr("test_insert_tetri : (x, y) = ");;
+	ft_putnbr(x);
+	ft_putchar(',');
+	ft_putnbr(y);
+	ft_putchar('\n');
+	// DEBUG
 	xi = 0;
 	while ((xi + x) < map->taille_map)
 	{
@@ -72,6 +79,8 @@ static int		resolve_map(t_map *map, t_tetri *lst)
 
 	// DEBUG
 	ft_putstr("resolve_map\n");
+	display_map(map);
+	ft_putchar('\n');
 	// DEBUG
 	if (lst->isvalid == 0)
 		return (0);
@@ -87,14 +96,13 @@ static int		resolve_map(t_map *map, t_tetri *lst)
 			if (test_insert_tetri(cp_map, lst, xi, yi))
 			{
 				lst++;
-				// DEBUG
-				display_map(cp_map);
-				ft_putchar('\n');
-				// DEBUG
 				if (lst->isvalid)
 				{
 					if (resolve_map(cp_map, lst))
+					{
 						return (1);
+					}
+					lst--;
 				}
 				else
 				{
@@ -107,6 +115,9 @@ static int		resolve_map(t_map *map, t_tetri *lst)
 		}
 		yi++;
 	}
+	// DEBUG
+	ft_putstr("resolve_map : impossible de resoudre sur cette map\n");
+	// DEBUG
 	return (0);
 }
 
