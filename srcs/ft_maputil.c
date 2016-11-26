@@ -6,7 +6,7 @@
 /*   By: ajouanna <ajouanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/24 11:40:14 by ajouanna          #+#    #+#             */
-/*   Updated: 2016/11/25 18:40:10 by msrun            ###   ########.fr       */
+/*   Updated: 2016/11/26 15:16:04 by msrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,8 +121,8 @@ void	copy_map(t_map *cp_map, t_map *map)
 		while (xi < map->taille_map + 3)
 		{
 			cp_map->map[yi][xi] = map->map[yi][xi];
-			xi++;
+			++xi;
 		}
-		yi++;
+		++yi;
 	}
 }

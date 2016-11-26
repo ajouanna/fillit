@@ -20,6 +20,7 @@ $(NAME) : $(LIST_SRC)
 		gcc $(CFLAG) -I $(INC) -I $(INC_LIBFTPATH) $(LIST_SRC) -L$(LIBFTPATH) -lft -o $(NAME)
 
 clean :
+		make clean -C $(LIBFTPATH)
 		/bin/rm -f  $(LIST_OBJ)
 
 fclean : clean

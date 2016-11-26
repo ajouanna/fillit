@@ -6,7 +6,7 @@
 /*   By: msrun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 15:55:23 by msrun             #+#    #+#             */
-/*   Updated: 2016/11/25 18:49:09 by msrun            ###   ########.fr       */
+/*   Updated: 2016/11/26 13:53:45 by msrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,7 @@ static int		test_insert_tetri(t_map *map, t_tetri *ptetri, int x, int y)
 	int yi;
 
 	xi = -1;
-	while (++xi < 4)
-	{
-		yi = -1;
+	while ((yi = -1) && ++xi < 4)
 		while (++yi < 4)
 		{
 			if ((ptetri->tab[yi][xi] != '.') && (((yi + y) >= map->taille_map)
@@ -37,15 +35,11 @@ static int		test_insert_tetri(t_map *map, t_tetri *ptetri, int x, int y)
 			&& (map->map[yi + y][xi + x] != '.' && ptetri->tab[yi][xi] != '.'))
 				return (0);
 		}
-	}
 	xi = -1;
-	while ((++xi + x) < x + 4)
-	{
-		yi = -1;
+	while ((yi = -1) && (++xi + x) < x + 4)
 		while ((++yi + y) < y + 4)
 			if (ptetri->tab[yi][xi] >= 'A' && ptetri->tab[yi][xi] <= 'Z')
 				map->map[yi + y][xi + x] = ptetri->tab[yi][xi];
-	}
 	return (1);
 }
 
@@ -64,9 +58,7 @@ static int		resolve_map(t_map *map, t_tetri *lst)
 	if (lst->isvalid == 0 || (cp_map = alloc_map(map->taille_map)) == NULL)
 		return (0);
 	yi = -1;
-	while (++yi < map->taille_map)
-	{
-		xi = -1;
+	while ((xi = -1) && ++yi < map->taille_map)
 		while (++xi < map->taille_map)
 		{
 			copy_map(cp_map, map);
@@ -82,7 +74,6 @@ static int		resolve_map(t_map *map, t_tetri *lst)
 					return (display_map(cp_map));
 			}
 		}
-	}
 	return (0);
 }
 
@@ -90,26 +81,27 @@ static int		resolve_map(t_map *map, t_tetri *lst)
 ** affiche la liste des tetriminos
 */
 
-/*static void		print_tetri(t_tetri *lst)
- **{
- **	int ret;
- **	int i;
- **
- **	ft_putstr("print_tetri\n");
- **	ret = 0;
- **	while (lst[ret].isvalid)
- **	{
- **		i = 0;
- **		while (i < 4)
- **		{
- **			ft_putstr(lst[ret].tab[i]);
- **			ft_putchar('\n');
- **			i++;
- **		}
- **		ft_putchar('\n');
- **		ret++;
- **	}
- **}
+/*
+** static void		print_tetri(t_tetri *lst)
+** {
+**	int ret;
+**	int i;
+**
+**	ft_putstr("print_tetri\n");
+**	ret = 0;
+**	while (lst[ret].isvalid)
+**	{
+**		i = 0;
+**		while (i < 4)
+**		{
+**			ft_putstr(lst[ret].tab[i]);
+**			ft_putchar('\n');
+**			i++;
+**		}
+**		ft_putchar('\n');
+**		ret++;
+**	}
+** }
 */
 
 /*

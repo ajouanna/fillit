@@ -6,7 +6,7 @@
 /*   By: msrun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 15:09:09 by msrun             #+#    #+#             */
-/*   Updated: 2016/11/24 13:15:50 by ajouanna         ###   ########.fr       */
+/*   Updated: 2016/11/26 11:44:22 by msrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,8 @@ int		ft_check_itsquare(char *buf)
 
 int		ft_check_file(char *buf)
 {
-	int i;
 	int err;
 
-	i = 0;
 	err = 0;
 	err = ft_check_max(buf);
 	if (!err)

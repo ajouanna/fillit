@@ -6,7 +6,7 @@
 /*   By: msrun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/24 15:11:45 by msrun             #+#    #+#             */
-/*   Updated: 2016/11/24 16:43:11 by msrun            ###   ########.fr       */
+/*   Updated: 2016/11/26 11:46:36 by msrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,6 @@ void	ft_move_left(t_tetri *lst, int pos)
 
 void	ft_replace_if_void(t_tetri *lst, int pos)
 {
-	int i;
-
-	i = 0;
 	while (lst[pos].tab[0][0] != '#' && lst[pos].tab[0][1] != '#' &&
 			lst[pos].tab[0][2] != '#' && lst[pos].tab[0][3] != '#')
 		ft_move_top(lst, pos);

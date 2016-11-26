@@ -6,7 +6,7 @@
 /*   By: msrun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/24 13:52:28 by msrun             #+#    #+#             */
-/*   Updated: 2016/11/25 18:04:27 by msrun            ###   ########.fr       */
+/*   Updated: 2016/11/26 11:45:17 by msrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,10 @@ int		ft_check_place(t_tetri lst)
 int		ft_check_form(t_tetri *lst)
 {
 	int i;
-	int nb;
 
 	i = 0;
 	while (lst[i].isvalid == 1)
 	{
-		nb = 0;
 		if (ft_check_place(lst[i]) == 1)
 			return (1);
 		++i;
