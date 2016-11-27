@@ -6,7 +6,7 @@
 /*   By: msrun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 15:55:12 by msrun             #+#    #+#             */
-/*   Updated: 2016/11/24 16:35:01 by msrun            ###   ########.fr       */
+/*   Updated: 2016/11/27 16:00:29 by ajouanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,16 @@ t_tetri		*ft_alloc(t_tetri *lst, char *buf)
 }
 
 /*
-** Remplie la liste des tetriminos passee en parametre
+** libere la liste passee en parametre
+*/
+
+void		ft_free_lst(t_tetri *lst)
+{
+	free(lst);
+}
+
+/*
+** Remplit la liste des tetriminos passee en parametre
 */
 
 void		ft_fill(t_tetri *lst, char *buf)
