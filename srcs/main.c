@@ -6,12 +6,11 @@
 /*   By: msrun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 14:00:09 by msrun             #+#    #+#             */
-/*   Updated: 2016/11/27 16:25:24 by ajouanna         ###   ########.fr       */
+/*   Updated: 2016/11/30 19:16:31 by ajouanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_fillit.h"
-#include <stdio.h>
 
 /*
 ** main : enchainement des traitements et gestion des erreurs
